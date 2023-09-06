@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+    <section class="singlepost">
+        <div class="container singlepost__container">
+            <h2>{{ page.title }}</h2>
+            <div class="post__author">
+                <div class="post__author-avatar">
+                    <img src="./images/avatar2.jpg" alt="">
+                </div>
+                <div class="post__author-info">
+                    <h5>{{ page.intro }}</h5>
+                    <small>{{ page.date }}</small>
+                </div>
+            </div>
+            {% for item in page.gallery_images.all %}
+                <div class="singlepost__thumbnail">
+                    <img src="{% image item.image fill-320x240 %}">
+                    <p>{{ item.caption }}</p>
+                </div>
+            {% endfor %}
+            <p>{{ page.body|richtext }}</p>
+                <!-- Add this: -->
+
+            {% for post in page.get_children %}
+                <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+                {{ post.specific.intro }}
+                {% for item in post.specific.gallery_images.all %}
+                <div class="singlepost__thumbnail">
+                    <img src="{% image item.specific.image fill-320x240 %}">
+                    <p>{{ item.specific.caption }}</p>
+                </div>
+                {% endfor %}
+                {{ post.specific.body|richtext }}
+            {% endfor %}
+            <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+        </div>
+    </section>
+
+{% endblock %}
