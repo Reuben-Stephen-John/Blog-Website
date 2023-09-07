@@ -11,7 +11,7 @@
         <form class="container search__bar-container" action="{% url 'search_view' %}">
             <div>
                 <i class="uil uil-search"></i>
-                <input type="search" name="" placeholder="Search">
+                <input type="search" name="q" placeholder="Search">
             </div>
             <button type="submit" class="btn">Go</button>
         </form>
@@ -53,6 +53,10 @@
             </article>
             {% endfor %} 
         </div>
+        <div class="center-button">
+            <a href="{% url 'home_view' %}" class="btn">Go Back</a>
+        </div>        
     </section>
+
 
 {% endblock %}

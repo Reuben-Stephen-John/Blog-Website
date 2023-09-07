@@ -396,7 +396,11 @@
     display: grid;
     place-content: center;
   }
-  
+  .center-button {
+    text-align: center; /* Center the button horizontally */
+    margin-top: 20px;   /* Adjust the top margin as needed */
+    margin-bottom: 40px; /* Adjust the bottom margin as needed */
+}
   .form__section {
     display: grid;
     place-items: center;
