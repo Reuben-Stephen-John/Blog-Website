@@ -22,3 +22,8 @@ def home_view(request):
 
     return render(request, 'blog/home_view.html', {'latest_blog': latest_blog, 'blogs': blogs})
 
+def about_view(request):
+    return render(request, 'blog/about.html')
+
+def contact_view(request):
+    return render(request, 'blog/contact.html')

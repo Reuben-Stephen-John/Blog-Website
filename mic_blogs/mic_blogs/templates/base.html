@@ -15,9 +15,9 @@
             <a href="{% url 'home_view' %}" class="nav__logo">MIC</a>
             <ul class="nav__items">
                 <li><a href="{% url 'search_view' %}">Blog</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="{% url 'about_view' %}">About</a></li>
                 <!-- <li><a href="services.html">Services</a></li> -->
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{% url 'contact_view' %}">Contact</a></li>
                 <!-- <li><a href="signin.html">Signin</a></li> -->
                 <!-- <li class="nav__profile">
                     <div class="avatar">
@@ -92,6 +92,24 @@
             </small>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function (event) {
+                event.preventDefault(); 
+    
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const contactNo = document.getElementById('contactNo').value;
+                const message = document.getElementById('message').value;
+    
+                const mailtoURL = `mailto:micvitcc@gmail.com?subject=Contact%20Form%20Submission&body=Name:%20${name}%0AEmail:%20${email}%0AContact%20No.:%20${contactNo}%0AMessage:%20${message}`;
+                const mailtoLink = document.createElement('a');
+                mailtoLink.href = mailtoURL;
+                mailtoLink.click();
+            });
+        });
+    </script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
