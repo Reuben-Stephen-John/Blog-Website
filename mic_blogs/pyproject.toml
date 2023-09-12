@@ -9,6 +9,8 @@ packages = [{include = "mic_blogs"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 wagtail = "^5.1.1"
+wagtailcodeblock = "^1.29.0.1"
+wagtail-markdown = "^0.11.1"
 
 
 [build-system]

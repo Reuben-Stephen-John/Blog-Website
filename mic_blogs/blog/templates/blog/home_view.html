@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}template-blogindexpage{% endblock %}
+{% block content %}
+    <section class="featured">
+        <div class="container featured__container">
+            <div class="post__thumbnail">
+                {% image latest_blog.image fill-320x320 %}
+            </div>
+            <div class="post__info">
+                <h3>
+                    <a href="{% pageurl latest_blog %}" class="post_title">{{ latest_blog.title }}</a>
+                </h3>
+                <p class="post__body">
+                    {{ latest_blog.intro }}
+                </p>
+                <div class="post__author">
+                    <div class="post__author-avatar">
+                        {% if latest_blog.owner.wagtail_userprofile.avatar %}
+                        <img src="{{ latest_blog.owner.wagtail_userprofile.avatar.url }}" alt="{{ latest_blog.owner.get_full_name }}">
+                        {% endif %}
+                    </div>
+                    <div class="post__author-info">
+                        <h5>By: {{ latest_blog.owner.get_full_name }}</h5>
+                        <small>{{ latest_blog.date }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="posts">
+        <div class="container posts__container">
+            {% for blog in blogs %}
+                <article class="post">
+                    <div class="post__thumbnail">
+                        {% image blog.image fill-320x320 %}
+                    </div>
+                    <div class="post__info">
+                        <h3>
+                            <a href="{% pageurl blog %}" class="post_title">{{ blog.title }}</a>
+                        </h3>
+                        <p class="post__body">
+                            {{ blog.intro }}
+                        </p>
+                        <div class="post__author">
+                            <div class="post__author-avatar">
+                                {% if blog.owner.wagtail_userprofile.avatar %}
+                                <img src="{{ blog.owner.wagtail_userprofile.avatar.url }}" alt="{{ blog.owner.get_full_name }}">
+                                {% endif %}
+                            </div>
+                            <div class="post__author-info">
+                                <h5>By: {{ blog.owner.get_full_name }}</h5>
+                                <small>{{ blog.date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No results found.</p> 
+            {% endfor %}
+        </div>
+        <div class="center-button">
+            <a href="{% url 'search_view' %}" class="btn">View More</a>
+        </div>       
+    </section>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}template-blogindexpage{% endblock %}
+{% block content %}
+    <section class="search__bar">
+        <form class="container search__bar-container" action="{% url 'search_view' %}">
+            <div>
+                <i class="uil uil-search"></i>
+                <input type="search" name="q" placeholder="Search">
+            </div>
+            <button type="submit" class="btn">Go</button>
+        </form>
+    </section>
+    <section class="posts">
+        <div class="container posts__container">
+            {% if query %}
+            <div class="post__info">
+                <h1>Search Results</h1>
+                <p class="post__body">
+                    Search query: {{ query }}
+                </p>
+            </div>
+            {% else %}
+            <div class="post__info">
+                <h1>MIC BLOGS</h1>
+                <p class="post__body">
+                    Curated Content By MIC
+                </p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="container posts__container">
+            {% for result in results %}
+                <article class="post">
+                    <div class="post__thumbnail">
+                        {% image result.image fill-320x320 %}
+                    </div>
+                    <div class="post__info">
+                        <h3>
+                            <a href="{% pageurl result %}" class="post_title">{{ result.title }}</a>
+                        </h3>
+                        <p class="post__body">
+                            {{ result.intro }}
+                        </p>
+                        <div class="post__author">
+                            <div class="post__author-avatar">
+                                {% if result.owner.wagtail_userprofile.avatar %}
+                                <img src="{{ result.owner.wagtail_userprofile.avatar.url }}" alt="{{ result.owner.get_full_name }}">
+                                {% endif %}
+                            </div>
+                            <div class="post__author-info">
+                                <h5>By: {{ result.owner.get_full_name }}</h5>
+                                <small>{{ result.date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+            {% if query %}
+                <p>No results found.</p> 
+            {% endif %}
+            {% endfor %}
+            {% if not query %}
+            {% for blog in blogs %}
+            <article class="post">
+                <div class="post__thumbnail">
+                    {% image blog.image fill-320x320 %}
+                </div>
+                <div class="post__info">
+                    <h3>
+                        <a href="{% pageurl blog %}" class="post_title">{{ blog.title }}</a>
+                    </h3>
+                    <p class="post__body">
+                        {{ blog.intro }}
+                    </p>
+                    <div class="post__author">
+                        <div class="post__author-avatar">
+                            {% if blog.owner.wagtail_userprofile.avatar %}
+                            <img src="{{ blog.owner.wagtail_userprofile.avatar.url }}" alt="{{ blog.owner.get_full_name }}">
+                            {% endif %}
+                        </div>
+                        <div class="post__author-info">
+                            <h5>By: {{ blog.owner.get_full_name }}</h5>
+                            <small>{{ blog.date }}</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %} 
+            {% endif %}
+        </div>
+        <div class="center-button">
+            <a href="{% url 'home_view' %}" class="btn">Go Back</a>
+        </div>       
+    </section>
+{% endblock %}

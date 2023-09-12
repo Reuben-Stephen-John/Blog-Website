@@ -1,18 +1,62 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags  wagtailimages_tags %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    <div class="intro">{{ page.intro|richtext }}</div>
 
-    {% for post in page.get_children %}
-        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-        {{ post.specific.intro }}
-        {{ post.specific.body|richtext }}
-    {% endfor %}
+    <section class="search__bar">
+        <form class="container search__bar-container" action="{% url 'search_view' %}">
+            <div>
+                <i class="uil uil-search"></i>
+                <input type="search" name="q" placeholder="Search">
+            </div>
+            <button type="submit" class="btn">Go</button>
+        </form>
+    </section>
+    <section class="posts">
+        <div class="container posts__container">
+            <div class="post__info">
+                <h1>{{ page.title }}</h1>
+                <p class="post__body">
+                    {{ page.intro|richtext }}
+                </p>
+            </div>
+        </div>
+        <div class="container posts__container">
+            {% for post in page.get_children %}
+            <article class="post">
+                <div class="post__thumbnail">
+                    {% image post.specific.image fill-320x300 %}
+                </div>
+                <div class="post__info">
+                    <h3>
+                        <a href="{% pageurl post %}" class="post_title">{{ post.specific.title }}</a>
+                    </h3>
+                    <p class="post__body">
+                        {{ post.specific.intro }}
+                    </p>
+                    <div class="post__author">
+                        <div class="post__author-avatar">
+                            {% if post.specific.owner.wagtail_userprofile.avatar %}
+                            <img src="{{ post.specific.owner.wagtail_userprofile.avatar.url }}" alt="{{ post.specific.owner.get_full_name }}">
+                            {% endif %}
+                        </div>
+                        <div class="post__author-info">
+                            <h5>By: {{ post.specific.owner.get_full_name }}</h5>
+                            <small>{{ post.specific.date }}</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %} 
+        </div>
+        <div class="center-button">
+            <a href="{% url 'home_view' %}" class="btn">Go Back</a>
+        </div>        
+    </section>
+
 
 {% endblock %}
