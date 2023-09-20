@@ -35,4 +35,4 @@ Visit `http://localhost:8000` in your browser to view the application.
 ![image](https://github.com/micvitc/Blog-Website/assets/91174896/2190d3d8-d124-4ebb-87bc-d4c0df2a6ff7)
 
 ## Contributions
-@OHMPRAKASHD, @Devesh-XD, @Reuben-Stephen-John
+@OHMPRAKASHD, @Devesh-XD, @adithya262, @Reuben-Stephen-John... with special thanks to @ItsTulasiRaman for overseeing this project 💌.
