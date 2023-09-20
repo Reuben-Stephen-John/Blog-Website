@@ -33,3 +33,6 @@ Visit `http://localhost:8000` in your browser to view the application.
 ![image](https://github.com/micvitc/Blog-Website/assets/91174896/5e7357f0-7de2-4062-b600-ac643e98d5b0)
 ## Admin Panel.
 ![image](https://github.com/micvitc/Blog-Website/assets/91174896/2190d3d8-d124-4ebb-87bc-d4c0df2a6ff7)
+
+## Contributions
+@OHMPRAKASHD, @Devesh-XD, @Reuben-Stephen-John
